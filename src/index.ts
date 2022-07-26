@@ -95,6 +95,7 @@ if (import.meta.vitest) {
 
       expect(actual).eq('@@@@????    ');
     });
+
     it('splitCharEachNumber - unit test', () => {
       const actual = splitCharEachNumber('0123456789')(2);
 
