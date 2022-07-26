@@ -85,25 +85,28 @@ const main = async () => {
 main();
 
 if (import.meta.vitest) {
-  const { describe, it, expect } = import.meta.vitest;
+  const { assert, describe, it, expect } = import.meta.vitest;
 
   describe('test', () => {
-    it('convertAscii', () => {
-      const asciiChars = [
-        '  ',
-        '::',
-        ';;',
-        '++',
-        '**',
-        '??',
-        '##',
-        'SS',
-        '##',
-        '@@',
-      ];
+    it('convertAscii - unit test', () => {
+      const asciiChars = ['  ', '??', '@@'];
+      const input = Buffer.from([255, 171, 170, 86, 85, 0]);
+      const actual = convertAscii(asciiChars)(input);
 
-      const input = Buffer.from([255, 0]);
-      expect(convertAscii(asciiChars)(input)).eq('@@  ');
+      expect(actual).eq('@@@@????    ');
+    });
+    it('splitCharEachNumber - unit test', () => {
+      const actual = splitCharEachNumber('0123456789')(2);
+
+      assert.deepEqual(actual, ['01', '23', '45', '67', '89']);
+    });
+
+    it('insertLineBreak - unit test', () => {
+      const input = '@@@@@@@@@@@@@@@@';
+      const actual = insertLineBreak(4)(input);
+
+      const expected = '@@@@\n@@@@\n@@@@\n@@@@';
+      expect(actual).eq(expected);
     });
   });
 }
