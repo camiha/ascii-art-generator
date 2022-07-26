@@ -69,7 +69,7 @@ const main = async () => {
     '##',
     '@@',
   ];
-  const width = 60;
+  const width = 40;
   const renderWidth = width * asciiChars[0].length;
 
   const result = await promisePipe(
